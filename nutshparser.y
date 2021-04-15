@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <string.h>
 #include "global.h"
-#include <fnmatch.h>
 
 int yylex(void);
 int yyerror(char *s);
@@ -18,7 +17,8 @@ int goHome();
 int setEnv(char *var, char *word);
 int printEnv();
 int unsetEnv(char *var);
-int fnmatch(const char *pattern, const char *string, int flags)
+bool patternMatch(char* string, char* pattern);
+
 {
 	printf()
 }

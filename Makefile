@@ -1,23 +1,15 @@
-# Simple Makefile
+CC=/usr/bin/cc
 
-CC=/home/monica/nutshell
-
-all:  flex-config bison-config nutshparser nutshscanner nutshell nutshell-out
-
-flex-config:
-	flex LEXER.l
+all:  bison-config flex-config nutshell
 
 bison-config:
-	bison -d PARSER.y
+	bison -d nutshparser.y
 
-LEXER:  lex.yy.c
-	$(CC) -c lex.yy.c -o LEXER.lex.o
+flex-config:
+	flex nutshscanner.l
 
-PARSER:  PARSER.tab.c
-	$(CC) -c PARSER.tab.c -o PARSER.y.o
+nutshell:
+	$(CC) nutshell.c nutshparser.tab.c lex.yy.c -o nutshell
 
-MAIN:  MAIN.c
-	$(CC) -g -c MAIN.c -o MAIN.o 
-
-MAIN-out:
-	$(CC) -o MAIN MAIN.o LEXER.lex.o PARSER.y.o -ll -lm -lfl
+clean:
+	rm nutshparser.tab.c nutshparser.tab.h lex.yy.c nutshell
